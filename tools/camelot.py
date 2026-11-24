@@ -13,8 +13,8 @@ Works on Windows, macOS and Linux. Needs Python 3.8+, a JDK (11 or newer) and th
     python tools/camelot.py install             install Camelot on the TV and open it
     python tools/camelot.py set-home            make Camelot the home screen (asks first)
     python tools/camelot.py setup               build + install + set-home in one go
-    python tools/camelot.py restore-home        bring back the TV's original home screen
-    python tools/camelot.py uninstall           restore the original home screen, then remove Camelot
+    python tools/camelot.py restore-home        go back to the home screen you had before Camelot
+    python tools/camelot.py uninstall           go back to your previous home screen, then remove Camelot
     python tools/camelot.py debloat <list>      turn off the apps in debloat/<list>.txt (asks first)
     python tools/camelot.py undo-debloat        turn back on everything debloat turned off
     python tools/camelot.py screenshot [file]   save a screenshot of the TV
@@ -530,7 +530,8 @@ def sh(serial, *args, check=False, timeout=60):
 
 
 def installed(serial, pkg):
-    return ("package:" + pkg) in sh(serial, "pm", "path", pkg)
+    out = sh(serial, "pm", "list", "packages", pkg)          # lists every package containing the text
+    return any(l.strip() == "package:" + pkg for l in out.splitlines())
 
 
 def packages(serial, flag=""):
@@ -656,10 +657,74 @@ def cmd_install(_):
     return 0
 
 
+HOME_RECORD_TV = "/data/local/tmp/camelot-home.json"     # a copy kept on the TV, in case the computer changes
+COMPONENT = re.compile(r"^\s*([A-Za-z0-9_.]+)/([A-Za-z0-9_.$]+)\s*$")
+
+
+def current_home(serial):
+    """The home screen the TV opens right now (package/activity), or None if it would ask."""
+    out = sh(serial, "cmd", "package", "resolve-activity", "--brief", "-a", "android.intent.action.MAIN",
+             "-c", "android.intent.category.HOME")
+    for line in reversed(out.splitlines()):
+        m = COMPONENT.match(line)
+        if m:
+            comp = m.group(0).strip()
+            return None if comp.startswith("android/") or "ResolverActivity" in comp else comp
+    return None
+
+
+def home_record_path(serial):
+    return LOCAL / ("home-%s.json" % re.sub(r"[^A-Za-z0-9]", "_", serial))
+
+
+def load_home_record(serial):
+    """What set-home changed: the home screen in use before Camelot, and the apps it turned off."""
+    try:
+        rec = json.loads(home_record_path(serial).read_text("utf-8"))
+        if isinstance(rec, dict) and rec:
+            return rec
+    except Exception:
+        pass
+    try:
+        rec = json.loads(sh(serial, "cat", HOME_RECORD_TV).strip() or "{}")
+        if isinstance(rec, dict):
+            return rec
+    except Exception:
+        pass
+    return {}
+
+
+def save_home_record(serial, rec):
+    LOCAL.mkdir(exist_ok=True)
+    home_record_path(serial).write_text(json.dumps(rec, indent=1), "utf-8")
+    save_local(load_local())
+    sh(serial, "echo '%s' > %s" % (json.dumps(rec), HOME_RECORD_TV))
+
+
+def clear_home_record(serial):
+    p = home_record_path(serial)
+    if p.exists():
+        p.unlink()
+    sh(serial, "echo '{}' > %s" % HOME_RECORD_TV)
+
+
+def usable_homes(serial):
+    return [h for h in activities(serial, "android.intent.category.HOME")
+            if not h.startswith(PKG + "/") and "setupwraith" not in h]
+
+
 def cmd_set_home(_):
     s = tv_serial()
     if not installed(s, PKG):
         fail("Camelot isn't installed on the TV yet. Run: python tools/camelot.py install")
+    # remember the home screen in use now (stock or another launcher), so restore-home can go back to it
+    rec = load_home_record(s)
+    before = current_home(s)
+    if before and not before.startswith(PKG + "/") and "setupwraith" not in before:
+        rec["previousHome"] = before
+        say("Current home screen: %s (restore-home will bring this one back)" % before)
+    save_home_record(s, rec)
+
     sh(s, "cmd", "package", "set-home-activity", ACTIVITY)
     sh(s, "cmd", "role", "add-role-holder", "android.app.role.HOME", PKG)
     present = [p for p in STOCK_HOMES if p in packages(s, "-e")]
@@ -670,13 +735,14 @@ def cmd_set_home(_):
             say("  %-45s %s" % (p, STOCK_HOMES[p]))
         say("\nUndo any time with: python tools/camelot.py restore-home   (a factory reset also undoes it)")
         if confirm("\nTurn them off now?"):
-            record = LOCAL / ("home-%s.txt" % re.sub(r"[^A-Za-z0-9]", "_", s))
-            LOCAL.mkdir(exist_ok=True)
+            done = []
             for p in present:
                 out = sh(s, "pm", "disable-user", "--user", "0", p)
+                if "disabled" in out:
+                    done.append(p)
                 say("  %s: %s" % (p, "turned off" if "disabled" in out else out.strip()))
-            record.write_text("\n".join(present) + "\n", "utf-8")
-            save_local(load_local())
+            rec["disabledByCamelot"] = sorted(set(rec.get("disabledByCamelot", [])) | set(done))
+            save_home_record(s, rec)
         else:
             say("Left them on. Camelot is set as default, but the stock home screen may come back on Google TV.")
     sh(s, "cmd", "package", "set-home-activity", ACTIVITY)
@@ -686,21 +752,44 @@ def cmd_set_home(_):
 
 
 def cmd_restore_home(_):
+    """Puts back the home screen that was in use before Camelot: the stock one or another launcher."""
     s = tv_serial()
+    rec = load_home_record(s)
+    # turn back on only what Camelot turned off; apps another launcher turned off are left as they were
     disabled = packages(s, "-d")
-    for p in STOCK_HOMES:
+    for p in rec.get("disabledByCamelot", []):
         if p in disabled:
             out = sh(s, "pm", "enable", p)
             say("  %s: %s" % (p, "turned back on" if "enabled" in out else out.strip()))
     sh(s, "cmd", "role", "remove-role-holder", "android.app.role.HOME", PKG)
-    homes = [h for h in activities(s, "android.intent.category.HOME")
-             if not h.startswith(PKG + "/") and "setupwraith" not in h]
-    stock = [h for h in homes if h.split("/")[0] in STOCK_HOMES] or homes
-    if stock:
-        sh(s, "cmd", "package", "set-home-activity", stock[0])
-        say("Home screen set back to " + stock[0])
+
+    homes = usable_homes(s)
+    if not homes:
+        # nothing else could be the home screen: turn the stock one back on so the TV is never left without one
+        disabled = packages(s, "-d")
+        for p in STOCK_HOMES:
+            if p in disabled:
+                out = sh(s, "pm", "enable", p)
+                say("  %s: %s" % (p, "turned back on" if "enabled" in out else out.strip()))
+        homes = usable_homes(s)
+
+    prev = rec.get("previousHome")
+    target = None
+    if prev:
+        target = next((h for h in homes if h == prev), None) \
+            or next((h for h in homes if h.split("/")[0] == prev.split("/")[0]), None)
+        if not target:
+            say("The home screen used before Camelot (%s) isn't available any more." % prev)
+    if not target:
+        stock = [h for h in homes if h.split("/")[0] in STOCK_HOMES]
+        target = (stock or homes or [None])[0]
+    if target:
+        sh(s, "cmd", "package", "set-home-activity", target)
+        sh(s, "cmd", "role", "add-role-holder", "android.app.role.HOME", target.split("/")[0])
+        say("Home screen set back to " + target + (" (the one you had before Camelot)" if target == prev else ""))
+    clear_home_record(s)
     sh(s, "input", "keyevent", "KEYCODE_HOME")
-    say("Original home screen restored. If the TV asks which home app to use, pick the original one.")
+    say("Done. If the TV asks which home app to use, pick the one you want and choose 'Always'.")
     return 0
 
 

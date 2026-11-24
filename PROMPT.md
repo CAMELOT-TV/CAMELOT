@@ -22,7 +22,7 @@ You are helping someone set up or customize **Camelot**, a home screen (launcher
 6. Ask whether anything is plugged into HDMI that they want a Live TV tile for, such as a set-top box or console, and on which port. Add it to `liveInputs` as `{ "name": "...", "hdmiPort": N }`. Use `python tools/camelot.py inputs` only if the port number alone doesn't work.
 7. Ask about looks: accent colour, title, background pictures, speed. All the options are in docs/CUSTOMIZE.md.
 8. `python tools/camelot.py build`, then, **after asking**, `install`.
-9. **After asking**, `set-home`. On Google TV this disables the stock home screen and the setup app, because that's the only way to stay on Camelot. Explain that this is reversible with `restore-home`, and that a TV update may undo it.
+9. **After asking**, `set-home`. It first remembers the current home screen, which may be the stock one or another launcher the person already uses, so `restore-home` can return to it. On Google TV this disables the stock home screen and the setup app, because that's the only way to stay on Camelot. Explain that this is reversible with `restore-home`, and that a TV update may undo it.
 10. Optionally offer `debloat` with the right list(s). Show the list first and get a yes.
 11. Ask the person to press Home and confirm it looks right. If they agree, `screenshot` lets you check it yourself.
 
@@ -38,6 +38,6 @@ Most requests map to `config/camelot.json`. See docs/CUSTOMIZE.md for every sett
 
 ## Undo
 
-- `restore-home`: the stock home screen comes back.
+- `restore-home`: the home screen used before Camelot comes back, whether that was the stock one or another launcher. Only apps Camelot turned off are turned back on.
 - `uninstall`: restores the home screen first, then removes Camelot.
 - `undo-debloat`: turns back on everything that `debloat` turned off on this TV.

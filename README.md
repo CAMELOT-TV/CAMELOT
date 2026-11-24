@@ -22,7 +22,7 @@ Your apps, your shows, your backgrounds. Nothing else.
 - **Your own backgrounds.** Drop pictures in a folder. They crossfade with a slow zoom.
 - **Your colours.** Change the accent colour, the title, the number of columns, the speed and more in one settings file.
 - **Made for the remote.** Smooth focus animations and predictable D-pad movement.
-- **Nothing is deleted.** Any app you turn off is disabled, not uninstalled. One command brings back the original home screen.
+- **Nothing is deleted.** Any app you turn off is disabled, not uninstalled. One command brings back whatever home screen you had before: the stock one or another launcher.
 
 It's made for any Android TV or Google TV running Android 6 or newer, whatever the brand: TCL, Sony, Philips, Hisense, Xiaomi, Chromecast with Google TV, Nvidia Shield and others. So far it has been tested on a TCL Google TV running Android 11, and reports from other TVs are welcome. **Fire TV** can run it as an app, but Fire OS won't let anything replace its home screen.
 
@@ -148,10 +148,12 @@ Camelot shows you the list first and asks. Apps are **disabled, never uninstalle
 ## Undo everything
 
 ```
-python tools/camelot.py restore-home     # the original home screen comes back
-python tools/camelot.py uninstall        # restores the home screen, then removes Camelot
+python tools/camelot.py restore-home     # your previous home screen comes back
+python tools/camelot.py uninstall        # restores your previous home screen, then removes Camelot
 python tools/camelot.py undo-debloat     # turns back on anything debloat turned off
 ```
+
+Camelot remembers which home screen you were using before it took over: the TV's own, or another launcher you had installed. `restore-home` goes back to exactly that one. It only turns back on the apps that Camelot itself turned off, so anything your other launcher had switched off stays off.
 
 A factory reset also undoes everything. Camelot never roots the TV or changes system files.
 

@@ -65,8 +65,8 @@ Netflix probably changed its Top 10 page. The row still shows continue-watching.
 ## Getting back to normal
 
 ```
-python tools/camelot.py restore-home     # original home screen back
-python tools/camelot.py uninstall        # remove Camelot (restores the home screen first)
+python tools/camelot.py restore-home     # the home screen you had before Camelot comes back
+python tools/camelot.py uninstall        # remove Camelot (restores your previous home screen first)
 python tools/camelot.py undo-debloat     # turn back on apps that debloat turned off
 ```
 
