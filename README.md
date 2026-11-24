@@ -5,9 +5,9 @@
 **A clean home screen for Android TV and Google TV, with no ads on it.**
 Your apps, your shows, your backgrounds. Nothing else.
 
-![Camelot home screen (illustration)](docs/preview.jpg)
+![Camelot on a TCL Google TV](docs/screenshot.jpg)
 
-<sub>Illustration of the layout. On a real TV, each tile shows that app's own banner.</sub>
+<sub>Camelot on a TCL Google TV (Android 11), with the owner's own apps and background.</sub>
 
 </div>
 
