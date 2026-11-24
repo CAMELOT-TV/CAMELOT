@@ -96,7 +96,7 @@ Every setting is explained in **[docs/CUSTOMIZE.md](docs/CUSTOMIZE.md)**.
 
 ### 7. Add backgrounds *(optional)*
 
-Put your own pictures (`.jpg`, `.png` or `.webp`) in the **`backgrounds/`** folder. One original dark picture is already there. Delete it if you don't want it. Landscape pictures look best. See [backgrounds/README.md](backgrounds/README.md).
+Put your own pictures (`.jpg`, `.png` or `.webp`) in the **`backgrounds/`** folder. Two pictures are already there: Singapore at dusk and a starry night sky. Delete either if you don't want them. Landscape pictures look best. See [backgrounds/README.md](backgrounds/README.md).
 
 ### 8. Build, install and make it your home screen
 

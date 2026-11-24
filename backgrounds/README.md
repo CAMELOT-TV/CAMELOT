@@ -9,6 +9,9 @@ Every picture in this folder becomes a home screen background. They crossfade on
 - **How many:** as many as you like, but each one adds to the app's size. Somewhere between 5 and 20 is plenty.
 - **Dark pictures work best,** because the white and gold text sits on top. `backgroundDim` in `config/camelot.json` controls the shade over them.
 
-`night-sky.jpg` is an original picture made for Camelot and is MIT-licensed like the rest of the project. Delete it if you don't want it.
+Two pictures come with Camelot. Delete either one if you don't want it:
+
+- `city-dusk.jpg`: Singapore at dusk, photo by [Wengang Zhai](https://unsplash.com/@wgzhai) on [Unsplash](https://unsplash.com/photos/aerial-view-of-city-buildings-during-sunset-Q7UZxzdiCHY), used under the [Unsplash License](https://unsplash.com/license) (free to use; this licence, not MIT, applies to that photo).
+- `night-sky.jpg`: an original picture made for Camelot, MIT-licensed like the rest of the project.
 
 Only add pictures you have the rights to use, such as your own photos or properly licensed images. That matters most if you share your fork.
