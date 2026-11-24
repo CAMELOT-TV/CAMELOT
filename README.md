@@ -90,7 +90,7 @@ This lists the package name of every app on your TV. Open **`config/camelot.json
 - **`homeApps`**: the tiles on the home screen, in order.
 - **`showRows`**: the apps whose shows appear in rows under the tiles.
 - **`hiddenApps`**: apps to keep out of the All Apps panel.
-- **`liveInputs`**: Live TV tiles, for example `{ "name": "Set-top box", "hdmiPort": 2 }`.
+- **`liveInputs`**: tiles for anything plugged into HDMI (set-top box, PS5, Xbox...), for example `{ "name": "PS5", "hdmiPort": 1 }`. Rename their page with `liveTabName`.
 
 Every setting is explained in **[docs/CUSTOMIZE.md](docs/CUSTOMIZE.md)**.
 

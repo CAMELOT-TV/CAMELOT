@@ -365,7 +365,7 @@ public class MainActivity extends Activity {
         tabs.setOrientation(LinearLayout.HORIZONTAL);
         tabs.setGravity(Gravity.CENTER);
         pageLabel1 = pageTab("APPS");
-        pageLabel2 = pageTab("LIVE TV");
+        pageLabel2 = pageTab(cfg.liveTabName.toUpperCase(Locale.ROOT));
         tabs.addView(pageLabel1);
         TextView sep = new TextView(this);
         sep.setText("   \u00B7   ");
@@ -526,7 +526,7 @@ public class MainActivity extends Activity {
             bg.setStroke(has ? px(2) : 0, ACCENT);
             if (has) {
                 if (scroller != null) scroller.smoothScrollTo(0, 0);
-                showName(x == pageLabel2 ? "Live TV" : "Apps");
+                showName(x == pageLabel2 ? cfg.liveTabName : "Apps");
                 int want = (x == pageLabel2) ? 1 : 0;
                 if (want != page) goToPage(want, -1);
             }

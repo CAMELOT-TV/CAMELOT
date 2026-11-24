@@ -66,16 +66,19 @@ Netflix only shares "continue watching". To add the Top 10 list from Netflix's p
 
 Use `"global"` for the worldwide list, or your country as it appears in the Top 10 page address, for example `"india"`, `"united-kingdom"` or `"brazil"`. Leave it as `""` to turn it off. This reads a public web page, so it can stop working if Netflix changes that page. If it does, the row just shows continue-watching.
 
-## Live TV page
+## Live TV page (HDMI devices)
 
 ```json
+"liveTabName": "LIVE TV",
 "liveInputs": [
   { "name": "Set-top box", "hdmiPort": 2 },
-  { "name": "PlayStation", "hdmiPort": 1, "subtitle": "HDMI 1 · Game" }
+  { "name": "PS5", "hdmiPort": 1, "subtitle": "HDMI 1 · Game" }
 ]
 ```
 
-Each entry adds a tile to the **LIVE TV** page that switches the TV to that input. With an empty list, there is no Live TV page and the APPS · LIVE TV tabs are hidden, so the home screen shows just your apps.
+Each entry adds a tile to a second page that switches the TV to that HDMI input: a set-top box, PS5, Xbox, Fire Stick, or anything else plugged into the TV. With an empty list, there is no second page and the tabs are hidden, so the home screen shows just your apps.
+
+- **`liveTabName`**: the name of that page's tab, next to APPS. It defaults to `"LIVE TV"`. Call it whatever fits, for example `"GAMING"`, `"PS5"` or `"DEVICES"`.
 
 - **`hdmiPort`**: the port number printed on the back of the TV.
 - **`subtitle`** *(optional)*: the small line under the name. It defaults to "HDMI n".

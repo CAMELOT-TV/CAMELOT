@@ -53,6 +53,7 @@ final class Config {
     final List<HomeApp> homeApps = new ArrayList<>();
     final List<ShowRow> showRows = new ArrayList<>();
     final List<LiveInput> liveInputs = new ArrayList<>();
+    String liveTabName = "LIVE TV";                     // name of the second page, e.g. "GAMING" or "PS5"
     final Set<String> hiddenApps = new HashSet<>();     // package names or app labels, lower case
     int maxShowsPerRow = 25;
     long backgroundMillis = 9_000;
@@ -108,6 +109,9 @@ final class Config {
             r.name = j.optString("name", r.packages.length > 0 ? r.packages[0] : "");
             if (r.packages.length > 0) showRows.add(r);
         }
+
+        liveTabName = o.optString("liveTabName", liveTabName).trim();
+        if (liveTabName.isEmpty()) liveTabName = "LIVE TV";
 
         a = o.optJSONArray("liveInputs");
         if (a != null) for (int i = 0; i < a.length(); i++) {
