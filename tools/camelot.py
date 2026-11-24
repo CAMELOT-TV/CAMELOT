@@ -480,8 +480,11 @@ def adb_bin():
 
 
 def normalise_addr(addr):
+    """An IP or host name gets adb's network port (5555) added; USB serials and emulator names stay as they are."""
     addr = addr.strip()
-    return addr if ":" in addr else addr + ":5555"
+    if ":" in addr or "." not in addr:
+        return addr
+    return addr + ":5555"
 
 
 def adb_devices():
@@ -506,7 +509,7 @@ def tv_serial():
     addr = normalise_addr(TV_ARG) if TV_ARG else load_local().get("tv")
     if addr:
         state = adb_devices().get(addr)
-        if state != "device":
+        if state != "device" and ":" in addr:          # network TVs can be reconnected; USB/emulator can't
             connect(addr, quiet=True)
             state = adb_devices().get(addr)
         if state == "unauthorized":
@@ -903,7 +906,7 @@ def main():
         fail("Python 3.8 or newer is needed.")
     ap = argparse.ArgumentParser(prog="camelot", description="Build and set up the Camelot home screen.",
                                  formatter_class=argparse.RawDescriptionHelpFormatter, epilog=__doc__.split("\n\n")[1])
-    ap.add_argument("--tv", help="TV address (IP or IP:PORT) for this command")
+    ap.add_argument("--tv", help="TV for this command: IP, IP:PORT, or a device name from 'adb devices' (e.g. emulator-5554)")
     ap.add_argument("--yes", action="store_true", help="answer yes to confirmations")
     sub = ap.add_subparsers(dest="cmd")
     sub.add_parser("doctor")
