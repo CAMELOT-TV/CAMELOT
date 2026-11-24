@@ -28,9 +28,9 @@ It's made for any Android TV or Google TV running Android 6 or newer, whatever t
 
 ---
 
-## Setup, step by step
+## Setup
 
-You need a computer (Windows, Mac or Linux) on the **same Wi-Fi or network** as the TV. Setup takes about 20 minutes the first time.
+You need a computer (Windows, Mac or Linux) on the **same Wi-Fi or network** as the TV.
 
 ### 1. Turn on debugging on the TV
 
@@ -41,7 +41,28 @@ You need a computer (Windows, Mac or Linux) on the **same Wi-Fi or network** as 
 
 > Some newer TVs only have **Wireless debugging**, which uses a pairing code. See [Pairing code TVs](docs/TROUBLESHOOTING.md#pairing-code-tvs).
 
-### 2. Install the tools on your computer
+### 2. Get Camelot
+
+Click **Code → Download ZIP** on this page and unzip it, or use git:
+
+```
+git clone https://github.com/CAMELOT-TV/CAMELOT.git
+cd CAMELOT
+```
+
+### The easy way: let an AI assistant do it
+
+If you have an AI coding assistant on your computer (Claude Code, Codex, Gemini CLI, Cursor or similar), it can do everything from here for you. Open the CAMELOT folder in it and say:
+
+> *Set up Camelot on my TV. Its IP is* (your TV's IP address)*.*
+
+It checks your computer and helps you install anything missing, asks which apps you want on your home screen and what's plugged into HDMI, then builds Camelot and installs it. It asks you before every change on the TV. **[PROMPT.md](PROMPT.md)** tells it how, and the `CLAUDE.md`, `AGENTS.md` and `GEMINI.md` files point assistants to it.
+
+### Or do it yourself, step by step
+
+The rest of this section is the same setup by hand, about 20 minutes the first time. Run every command **from inside the CAMELOT folder**. On Windows, if `python` doesn't work, use `py` instead.
+
+### 3. Install the tools on your computer
 
 | What | Where to get it |
 |---|---|
@@ -51,17 +72,6 @@ You need a computer (Windows, Mac or Linux) on the **same Wi-Fi or network** as 
 | *(optional)* Pillow | `pip install Pillow`. It resizes your background pictures automatically. |
 
 If you'd rather not install Android Studio, the command-line SDK tools plus any **JDK 11 or newer** (for example [Temurin 17](https://adoptium.net)) work too.
-
-### 3. Get Camelot
-
-Click **Code → Download ZIP** on this page and unzip it, or use git:
-
-```
-git clone https://github.com/CAMELOT-TV/CAMELOT.git
-cd CAMELOT
-```
-
-Run every command below **from inside the CAMELOT folder**. On Windows, if `python` doesn't work, use `py` instead.
 
 ### 4. Check everything is ready
 
@@ -120,16 +130,6 @@ python tools/camelot.py install
 ### 10. *(Optional)* Turn debugging off again
 
 When you're happy, you can turn **USB debugging** off in Developer options. Camelot keeps working. Turn it back on whenever you want to change something.
-
----
-
-## Let an AI assistant do it
-
-The steps above are written for people, but an AI coding assistant can do all of them for you: Claude Code, Codex, Gemini CLI, Cursor and others. Open this folder in it and say:
-
-> *Set up Camelot on my TV. Its IP is* (your TV's IP address)*.*
-
-**[PROMPT.md](PROMPT.md)** tells the assistant how to find your apps and HDMI inputs and to ask you before changing anything on the TV. The `CLAUDE.md`, `AGENTS.md` and `GEMINI.md` files point assistants to it.
 
 ---
 
