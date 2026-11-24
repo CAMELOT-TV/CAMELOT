@@ -37,7 +37,7 @@ You need a computer (Windows, Mac or Linux) on the **same Wi-Fi or network** as 
 1. On the TV, open **Settings → System → About**. On older Android TVs it's **Settings → Device Preferences → About**.
 2. Scroll to **Android TV OS build** (or **Build**) and press **OK** 7 times, until it says you're a developer.
 3. Go back to **Settings → System → Developer options** and turn on **USB debugging**. If you see **Network debugging** or **ADB over network**, turn that on too.
-4. Find the TV's IP address under **Settings → Network & Internet → (your network)**. It looks like `192.168.0.25`.
+4. Find the TV's IP address under **Settings → Network & Internet → (your network)**. It's four numbers separated by dots, and on most home networks it starts with `192.168.`. Note it down.
 
 > Some newer TVs only have **Wireless debugging**, which uses a pairing code. See [Pairing code TVs](docs/TROUBLESHOOTING.md#pairing-code-tvs).
 
@@ -74,10 +74,10 @@ It tells you exactly what's missing, if anything.
 ### 5. Connect to the TV
 
 ```
-python tools/camelot.py connect 192.168.0.25
+python tools/camelot.py connect <your-TV-IP>
 ```
 
-Use your TV's IP address. The first time, **look at the TV**: tick **"Always allow from this computer"** and press **OK**. Run the command again if it timed out. The address is remembered after that.
+Replace `<your-TV-IP>` with your TV's own IP address from step 1: type just the numbers and dots, without the `< >`. The first time, **look at the TV**: tick **"Always allow from this computer"** and press **OK**. Run the command again if it timed out. The address is remembered after that.
 
 ### 6. Choose your apps
 
@@ -127,7 +127,7 @@ When you're happy, you can turn **USB debugging** off in Developer options. Came
 
 The steps above are written for people, but an AI coding assistant can do all of them for you: Claude Code, Codex, Gemini CLI, Cursor and others. Open this folder in it and say:
 
-> *Set up Camelot on my TV. Its IP is 192.168.0.25.*
+> *Set up Camelot on my TV. Its IP is* (your TV's IP address)*.*
 
 **[PROMPT.md](PROMPT.md)** tells the assistant how to find your apps and HDMI inputs and to ask you before changing anything on the TV. The `CLAUDE.md`, `AGENTS.md` and `GEMINI.md` files point assistants to it.
 
