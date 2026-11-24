@@ -196,4 +196,6 @@ Please don't commit anything from `.camelot/`, `build/` or any `.apk`/`.jks` fil
 
 [MIT](LICENSE) © 2026 Harish Gattikoppula
 
+Created by [Harish Gattikoppula](https://github.com/harish-gattikoppula).
+
 Camelot is an independent project. It is not affiliated with Google, Netflix, Amazon, Disney, Apple, TCL or any other company. App and brand names belong to their owners and are used only to identify apps.
