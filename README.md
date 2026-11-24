@@ -56,7 +56,7 @@ If you have an AI coding assistant on your computer (Claude Code, Codex, Gemini 
 
 > *Set up Camelot on my TV. Its IP is* (your TV's IP address)*.*
 
-It checks your computer and helps you install anything missing, asks which apps you want on your home screen and what's plugged into HDMI, then builds Camelot and installs it. It asks you before every change on the TV. **[PROMPT.md](PROMPT.md)** tells it how, and the `CLAUDE.md`, `AGENTS.md` and `GEMINI.md` files point assistants to it.
+Camelot is built on your own computer, so it still needs **Python** and **Android Studio** (step 3 below). The assistant checks what's missing and installs it or tells you exactly what to download; you only click **Yes** on your computer's own install pop-ups. Then it asks which apps you want on your home screen and what's plugged into HDMI, builds Camelot and installs it, asking you before every change on the TV. **[PROMPT.md](PROMPT.md)** tells it how, and the `CLAUDE.md`, `AGENTS.md` and `GEMINI.md` files point assistants to it.
 
 ### Or do it yourself, step by step
 
