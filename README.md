@@ -7,7 +7,7 @@ Your apps, your shows, your backgrounds. Nothing else.
 
 ![Camelot on a TCL Google TV](docs/screenshot.jpg)
 
-<sub>Camelot on a TCL Google TV (Android 11), with the owner's own apps and background.</sub>
+<sub>Camelot on a TCL Google TV (Android 11).</sub>
 
 </div>
 
