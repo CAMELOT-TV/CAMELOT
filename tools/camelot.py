@@ -190,7 +190,21 @@ def java_tool(name):
     for h in homes:
         if h and (Path(h) / "bin" / exe(name)).exists():
             return str(Path(h) / "bin" / exe(name))
-    return shutil.which(name)
+    found = shutil.which(name)
+    if found or name == "java":
+        return found
+    # Some installers only put small java/javac launchers on PATH (e.g. Oracle's "javapath" on Windows).
+    # Ask java where its real home is and look for the tool there (keytool lives only in the JDK's bin).
+    java = shutil.which("java")
+    if java:
+        out = run([java, "-XshowSettings:properties", "-version"], check=False)
+        m = re.search(r"java\.home = (.+)", out)
+        if m:
+            home = Path(m.group(1).strip())
+            for cand in (home / "bin" / exe(name), home.parent / "bin" / exe(name)):
+                if cand.exists():
+                    return str(cand)
+    return None
 
 
 def java_version(java):
