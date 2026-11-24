@@ -529,6 +529,9 @@ def tv_serial():
         if state == "unauthorized":
             fail("The TV is asking for permission. On the TV, tick 'Always allow from this computer' and press OK,\n"
                  "then run the command again.")
+        if state != "device" and ":" not in addr:
+            fail("Can't find %s. If it's an emulator, is it running? If it's a USB device, is the cable in?\n"
+                 "Run 'adb devices' to see what's connected." % addr)
         if state != "device":
             fail("Can't reach the TV at %s.\n  - Is the TV on and on the same network?\n"
                  "  - Is network/USB debugging still on? (it can turn off after a TV update)\n"

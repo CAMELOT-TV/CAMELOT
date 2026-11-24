@@ -425,7 +425,7 @@ public class MainActivity extends Activity {
         feedBox.setClipChildren(false);
         feedBox.setClipToPadding(false);
         LinearLayout.LayoutParams fblp = new LinearLayout.LayoutParams(-1, -2);
-        fblp.topMargin = px(72);   // show rows start just below the screen edge
+        fblp.topMargin = px(72);   // adjusted by placeShowRows() so the rows start just below the screen edge
         content.addView(feedBox, fblp);
 
 
@@ -611,6 +611,7 @@ public class MainActivity extends Activity {
             return;
         }
         alignNameLine();
+        placeShowRows();
         int want = Math.min(lastFocus, tiles.size() - 1);
         int wantPage = want >= appCount ? 1 : 0;
         page1.setVisibility(wantPage == 0 ? View.VISIBLE : View.GONE);
@@ -624,6 +625,25 @@ public class MainActivity extends Activity {
     }
 
     /** Starts the name line exactly above the left edge of the first tile, whatever the number of columns. */
+    /**
+     * Starts the show rows just below the bottom of the screen, however many rows of tiles there are,
+     * so the first screen never shows a half-cut row of shows. They come into view when you press down.
+     */
+    void placeShowRows() {
+        if (feedBox == null || scroller == null || pager == null) return;
+        feedBox.post(() -> {
+            int screen = scroller.getHeight();
+            if (screen <= 0) return;
+            int tilesBottom = pager.getTop() + Math.max(page1.getHeight(), page2.getHeight());
+            int want = Math.max(px(24), screen - tilesBottom + px(2));
+            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) feedBox.getLayoutParams();
+            if (lp.topMargin != want) {
+                lp.topMargin = want;
+                feedBox.setLayoutParams(lp);
+            }
+        });
+    }
+
     void alignNameLine() {
         if (nameLine == null || tiles.isEmpty()) return;
         final View first = tiles.get(0);
