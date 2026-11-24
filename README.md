@@ -57,7 +57,7 @@ If you'd rather not install Android Studio, the command-line SDK tools plus any 
 Click **Code → Download ZIP** on this page and unzip it, or use git:
 
 ```
-git clone https://github.com/harish-gattikoppula/CAMELOT.git
+git clone https://github.com/CAMELOT-TV/CAMELOT.git
 cd CAMELOT
 ```
 
