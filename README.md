@@ -2,7 +2,7 @@
 
 # 👑 CAMELOT
 
-**A clean, ad-free home screen for Android TV and Google TV.**
+**A clean home screen for Android TV and Google TV, with no ads on it.**
 Your apps, your shows, your backgrounds. Nothing else.
 
 ![Camelot home screen (illustration)](docs/preview.jpg)
@@ -16,7 +16,7 @@ Your apps, your shows, your backgrounds. Nothing else.
 ## What you get
 
 - **Only your apps.** Pick the apps you want on the home screen, in your order. Everything else waits in the **All Apps** panel.
-- **No ads and no "recommended for you".** Camelot shows nothing you didn't choose.
+- **No ads on your home screen.** No banners, sponsored rows or "recommended for you". Camelot shows nothing you didn't choose. Ads that play *inside* apps like Prime Video, JioHotstar or YouTube come from those apps and their plans, so Camelot doesn't change them.
 - **Your shows in rows.** You see "continue watching" and the show rows that your apps share with the TV.
 - **A page for your HDMI devices.** One-click tiles for your set-top box, PS5, Xbox or anything else plugged into the TV, on a page you name yourself. It only appears if you add a device.
 - **Your own backgrounds.** Drop pictures in a folder. They crossfade with a slow zoom.
@@ -162,7 +162,7 @@ A factory reset also undoes everything. Camelot never roots the TV or changes sy
 ## Good to know
 
 - **Show rows** come from what each app shares with the TV. Some apps share a lot, some share only "continue watching", and some share nothing. Netflix only shares continue watching. To add Netflix's public Top 10 to its row, set `netflixTop10Country` (see [CUSTOMIZE](docs/CUSTOMIZE.md#netflix-top-10)). That reads Netflix's public web page, so it may stop working if Netflix changes the page. When that happens, the row simply shows less.
-- **Privacy.** Camelot has no accounts, analytics or ads. It goes online only to load show pictures, plus the optional Netflix Top 10 page.
+- **Privacy.** Camelot itself has no accounts, analytics or ads. It goes online only to load show pictures, plus the optional Netflix Top 10 page.
 - **Your signing key** is created on your computer in the `.camelot/` folder, which is never uploaded. Keep that folder. If you lose it, run `uninstall` once before installing a new build.
 - **After a TV update**, the stock home screen sometimes turns itself back on. Run `python tools/camelot.py set-home` again.
 
