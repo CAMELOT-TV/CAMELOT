@@ -1,0 +1,41 @@
+{
+  "_help": "Every setting is explained in docs/CUSTOMIZE.md. After changing anything, run: python tools/camelot.py build && python tools/camelot.py install",
+
+  "title": "CAMELOT",
+  "showCrown": true,
+  "accentColor": "#D4AF37",
+  "columns": 4,
+
+  "homeApps": [
+    { "name": "YouTube",     "packages": ["com.google.android.youtube.tv", "com.google.android.youtube.googletv"], "match": "youtube" },
+    { "name": "Netflix",     "packages": ["com.netflix.ninja"], "match": "netflix" },
+    { "name": "Prime Video", "packages": ["com.amazon.amazonvideo.livingroom"], "match": "prime video" },
+    { "name": "Disney+",     "packages": ["com.disney.disneyplus"], "match": "disney" },
+    { "name": "Apple TV",    "packages": ["com.apple.atve.androidtv.appletv"], "match": "apple tv" },
+    { "name": "Spotify",     "packages": ["com.spotify.tv.android"], "match": "spotify" },
+    { "name": "Plex",        "packages": ["com.plexapp.android"], "match": "plex" },
+    { "name": "Kodi",        "packages": ["org.xbmc.kodi"], "match": "kodi" }
+  ],
+  "hideMissingApps": true,
+
+  "showRows": [
+    { "name": "YouTube",     "packages": ["com.google.android.youtube.tv", "com.google.android.youtube.googletv"] },
+    { "name": "Netflix",     "packages": ["com.netflix.ninja"] },
+    { "name": "Prime Video", "packages": ["com.amazon.amazonvideo.livingroom"] },
+    { "name": "Disney+",     "packages": ["com.disney.disneyplus"] },
+    { "name": "Apple TV",    "packages": ["com.apple.atve.androidtv.appletv"] },
+    { "name": "Plex",        "packages": ["com.plexapp.android"] }
+  ],
+  "maxShowsPerRow": 25,
+  "netflixTop10Country": "",
+
+  "liveInputs": [],
+
+  "hiddenApps": [
+    "org.chromium.webview_shell"
+  ],
+
+  "backgroundSeconds": 9,
+  "backgroundZoom": 1.18,
+  "backgroundDim": 1.0
+}

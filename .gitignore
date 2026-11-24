@@ -1,0 +1,24 @@
+# Your own machine's files: TV address, signing key, debloat records. Never commit these.
+.camelot/
+*.jks
+*.keystore
+keystore.json
+local.json
+
+# Build output
+build/
+*.apk
+*.apk.idsig
+*.dex
+*.class
+
+# Screenshots taken with the helper
+tv-screenshot.png
+
+# Python / editors / OS
+__pycache__/
+*.pyc
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

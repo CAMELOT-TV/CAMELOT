@@ -1,0 +1,12 @@
+# Google extras found on many Android TV / Google TV models.
+# Every line is turned OFF (disabled), never uninstalled. Undo: python tools/camelot.py undo-debloat
+# Delete a line (or put # in front of it) to keep that app.
+#
+# package                                   # what it is
+
+com.google.android.play.games               # Google Play Games
+com.google.android.videos                   # Google TV movie & show store (the "Shop" tab may stop working)
+com.google.android.youtube.tvmusic          # YouTube Music (keep it if you listen to music on the TV)
+com.google.android.apps.tv.dreamx           # Ambient mode screensaver (a basic screensaver is used instead)
+com.google.android.feedback                 # Sends feedback reports to Google
+android.autoinstalls.config.google.gtvpai   # Installs partner apps automatically during setup and updates

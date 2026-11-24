@@ -1,0 +1,25 @@
+# TCL extras. Tested on a TCL Google TV running Android 11; other TCL models may have only some of these.
+# Every line is turned OFF (disabled), never uninstalled. Undo: python tools/camelot.py undo-debloat
+# Delete a line (or put # in front of it) to keep that app.
+#
+# package                                   # what it is
+
+com.tcl.channelplus                         # TCL Channel: free channels with ads
+com.tcl.overseasappshow                     # TCL app recommendations
+com.tcl.waterfall.overseas                  # TCL recommendation / promo feed
+com.tcl.esticker                            # Promotional stickers and pop-ups
+com.tcl.messagebox                          # TCL message box (promotions and notices)
+com.tcl.bi                                  # TCL usage statistics
+com.tcl.gamebar                             # Game Bar overlay
+com.tcl.ocean.instructions                  # On-screen manual
+com.tcl.usercenter                          # TCL account centre
+com.tcl.smartalexa                          # Alexa built-in (keep it if you use Alexa)
+
+# Partner apps that came preinstalled on the tested TV
+com.mxtech.videoplayer.television           # MX Player
+au.com.stan.and                             # Stan
+tv.wuaki.apptv                              # Rakuten TV
+
+# Phone apps that have no use on a TV
+com.android.camera2                         # Camera
+com.android.messaging                       # SMS messages
