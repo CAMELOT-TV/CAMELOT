@@ -75,7 +75,7 @@ Use `"global"` for the worldwide list, or your country as it appears in the Top 
 ]
 ```
 
-Each entry adds a tile to the **LIVE TV** page that switches the TV to that input. With an empty list, the LIVE TV tab is hidden.
+Each entry adds a tile to the **LIVE TV** page that switches the TV to that input. With an empty list, there is no Live TV page and the APPS · LIVE TV tabs are hidden, so the home screen shows just your apps.
 
 - **`hdmiPort`**: the port number printed on the back of the TV.
 - **`subtitle`** *(optional)*: the small line under the name. It defaults to "HDMI n".

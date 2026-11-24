@@ -372,9 +372,10 @@ public class MainActivity extends Activity {
         sep.setTextColor(0x66FFFFFF);
         tabs.addView(sep);
         tabs.addView(pageLabel2);
-        if (cfg.liveInputs.isEmpty()) {             // nothing to show on a Live TV page
-            sep.setVisibility(View.GONE);
-            pageLabel2.setVisibility(View.GONE);
+        if (cfg.liveInputs.isEmpty()) {
+            // no Live TV page: a lone "APPS" tab would look odd, so the tab row is hidden
+            // (kept as empty space so everything below stays exactly where it is)
+            tabs.setVisibility(View.INVISIBLE);
         }
         LinearLayout.LayoutParams tlp2 = new LinearLayout.LayoutParams(-1, -2);
         tlp2.topMargin = px(44);
@@ -1397,11 +1398,16 @@ public class MainActivity extends Activity {
             }
             // ▲ from the first row of tiles goes up to the page tabs
             if (!panelOpen && k == KeyEvent.KEYCODE_DPAD_UP && ((onApp && idx < COLS) || (onLive && liveIdx < COLS))) {
-                (page == 1 ? pageLabel2 : pageLabel1).requestFocus();
+                if (cfg.liveInputs.isEmpty()) menuPill.requestFocus();      // no tabs: straight up to ALL APPS
+                else (page == 1 ? pageLabel2 : pageLabel1).requestFocus();
                 return true;
             }
             if (!panelOpen && cur == menuPill) {
-                if (k == KeyEvent.KEYCODE_DPAD_DOWN) { (page == 1 ? pageLabel2 : pageLabel1).requestFocus(); return true; }
+                if (k == KeyEvent.KEYCODE_DPAD_DOWN) {
+                    if (cfg.liveInputs.isEmpty()) enterPage();                // no tabs: back down to the apps
+                    else (page == 1 ? pageLabel2 : pageLabel1).requestFocus();
+                    return true;
+                }
                 if (k == KeyEvent.KEYCODE_DPAD_UP || k == KeyEvent.KEYCODE_DPAD_LEFT || k == KeyEvent.KEYCODE_DPAD_RIGHT) return true;
             }
             if (!panelOpen && onTab) {
