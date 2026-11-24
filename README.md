@@ -15,16 +15,16 @@ Your apps, your shows, your backgrounds. Nothing else.
 
 ## What you get
 
-- **Only your apps.** Pick up to 8 (or more) apps for the home screen. Everything else waits in the **All Apps** panel.
+- **Only your apps.** Pick the apps you want on the home screen, in your order. Everything else waits in the **All Apps** panel.
 - **No ads and no "recommended for you".** Camelot shows nothing you didn't choose.
 - **Your shows in rows.** You see "continue watching" and the show rows that your apps share with the TV.
-- **Live TV page.** One-click tiles for your set-top box, console or anything else on HDMI.
+- **A page for your HDMI devices.** One-click tiles for your set-top box, PS5, Xbox or anything else plugged into the TV, on a page you name yourself. It only appears if you add a device.
 - **Your own backgrounds.** Drop pictures in a folder. They crossfade with a slow zoom.
 - **Your colours.** Change the accent colour, the title, the number of columns, the speed and more in one settings file.
 - **Made for the remote.** Smooth focus animations and predictable D-pad movement.
 - **Nothing is deleted.** Any app you turn off is disabled, not uninstalled. One command brings back whatever home screen you had before: the stock one or another launcher.
 
-It's made for any Android TV or Google TV running Android 6 or newer, whatever the brand: TCL, Sony, Philips, Hisense, Xiaomi, Chromecast with Google TV, Nvidia Shield and others. So far it has been tested on a TCL Google TV running Android 11, and reports from other TVs are welcome. **Fire TV** can run it as an app, but Fire OS won't let anything replace its home screen.
+It's made for any Android TV or Google TV running Android 6 or newer, whatever the brand: TCL, Sony, Philips, Hisense, Xiaomi, Chromecast with Google TV, Nvidia Shield and others. So far it has been tested on a TCL Google TV and on the Android TV emulator, both running Android 11. Reports from other TVs are welcome. **Fire TV** can run it as an app, but Fire OS won't let anything replace its home screen.
 
 ---
 

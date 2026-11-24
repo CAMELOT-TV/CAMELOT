@@ -124,3 +124,18 @@ Some easy tweaks in `MainActivity.java`:
 - clock format: `clock.setFormat12Hour(...)` and `clock.setFormat24Hour(...)`
 
 An AI assistant can make these changes for you. See [PROMPT.md](../PROMPT.md).
+
+### Trying changes without your TV
+
+Android Studio's **Android TV emulator** works well for testing:
+
+1. In **Device Manager**, create a **TV** device with an Android TV system image (API 30 or newer) and start it.
+2. Install your build on it with `--tv emulator-5554`:
+
+```
+python tools/camelot.py build
+python tools/camelot.py --tv emulator-5554 install
+python tools/camelot.py --tv emulator-5554 --yes set-home
+```
+
+Use the keyboard arrows, Enter and Esc as the remote. The emulator has no HDMI ports, so Live TV tiles only show a "couldn't find" message there.
